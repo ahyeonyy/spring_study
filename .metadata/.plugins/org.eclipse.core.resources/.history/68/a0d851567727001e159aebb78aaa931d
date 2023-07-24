@@ -1,0 +1,8 @@
+package com.example.demo.db;
+
+public class Snippet {
+	public static void main(String[] args) {
+		spring.datasource.url=jdbc:oracle:thin:@sistoracle.cvsne1hytbbp.ap-northeast-2.rds.amazonaws.com:1521:orcl
+	}
+}
+

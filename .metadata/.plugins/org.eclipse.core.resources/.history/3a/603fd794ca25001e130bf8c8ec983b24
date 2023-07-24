@@ -1,0 +1,21 @@
+package com.example.demo.entity;
+
+import java.sql.Date;
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Data
+@Table(name="board")
+@Entity
+public class Board {
+	@Id
+	private int no;
+	private String writer;
+	private String title;
+	private String content;
+	private Date regdate;
+}

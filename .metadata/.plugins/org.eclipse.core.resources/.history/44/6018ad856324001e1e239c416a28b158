@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript">
+   $(function(){
+      $("#btn_pay").click(function(){
+         IMP.init("imp33232773");
+         IMP.request_pay({
+			 pg:'kcp',
+			 pay_method:'card',
+			 merchant_uid:'merchant1',
+			 name:'축구공',
+			 amount:1000,
+			 buyer_email:'qlqlql8448@naver.com',
+			 buyer_name:'이아현',
+			 buyer_tel:'010-5004-8448',
+			 buyer_addr:'경기도 파주시 가람로 109 311-204',
+			 buyer_postcode:'10869'
+		 }, function(res){
+			 console.log(res)
+		 })
+   });
+</script>
+</head>
+<body>
+   <button id="btn_pay">결제</button>
+</body>
+</html>
+
+
+
+

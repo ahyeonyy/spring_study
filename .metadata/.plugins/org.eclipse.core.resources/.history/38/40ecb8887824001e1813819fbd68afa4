@@ -1,0 +1,20 @@
+package com.example.demo.controller;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.vo.MemberVO;
+
+@RestController
+public class MemberController {
+	@GetMapping("/getMember")
+	public  String member() {
+		String str = "";
+		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
+		list.add(new MemberVO("아혀니","파주"));
+		return str;
+	}
+}

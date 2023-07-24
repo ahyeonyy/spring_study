@@ -1,0 +1,27 @@
+package com.example.demo.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Entity
+@Data
+@Table(name = "reply")
+public class Reply {
+	@Id
+	private int cno;
+	
+//	@ManyToOne
+//	@JoinColumn(name="no", insertable = true, updatable = true)
+//	private Board board;
+	
+	private String comment;
+	private String writer;
+	private String regdate;
+	private int b_ref;
+	private int b_level;
+	private int b_step;
+}

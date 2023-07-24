@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js
+"></script>
+<script>
+	$(function(){
+		$(".delete").click(function(event){
+			if(confirm("정말로 삭제하시겠습니까 ?")==false){
+				event.preventDefault();
+			}
+		})
+	})
+	
+</script>
+</head>
+
+<body>
+	<h1>고객 목록</h1>
+	<hr>
+	<table>
+		<tr>
+			<td>고객번호</td>
+			<td>이름</td>
+			<td>주소</td>
+			<td>전화번호</td>
+			<td>사진</td>
+			<td>Action</td>
+		</tr>
+		<tr th:each="c:${list}">
+			<td th:text="${c.custid}"></td>
+			<td th:text="${c.name}"></td>
+			<td th:text="${c.addr}"></td>
+			<td th:text="${c.phone}"></td>
+			<td th:text="${c.fname}"></td>
+			<td>
+				<a th:href="'/customer/update/'+${c.custid}">수정</a>
+				<a  class="delete" th:href="'/customer/delete/'+${c.custid}">삭제</a>
+
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

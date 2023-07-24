@@ -1,0 +1,63 @@
+package com.example.demo.controller;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.example.demo.dao.BoardDAO;
+import com.example.demo.entity.Board;
+
+import lombok.Setter;
+
+@Controller
+@Setter
+public class BoardController {
+	@Autowired
+	private BoardDAO dao;
+	
+	@GetMapping("/board/list")
+	public void list(Model model) {
+		model.addAttribute("list", dao.findAll());
+	}
+	
+	@PostMapping("/board/insert")
+	public ModelAndView insert (Board b) {
+		ModelAndView  mav = new ModelAndView("redirect:/board/list");
+		b.setRegdate(new Date());
+		dao.save(b);  
+		return mav;
+	}
+	
+	@GetMapping("/board/insert")
+	public void insertForm() {
+	}
+	
+	@GetMapping("/board/detail/{no}")
+	public String detail(@PathVariable("no") int no, Model model) {
+		model.addAttribute("b", dao.findById(no).get());
+		return "/board/detail";
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:if="${session.name != null}">
+	<p><span th:text="${session.name}">님, 환영~</span></p>
+</div>
+</body>
+</html>

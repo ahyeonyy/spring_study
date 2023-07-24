@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+	$(function(){
+		$("#btnSubmit").click(function(){
+			var keyword = $("#keyword").val();
+			var column = $("#column").val();
+			url = "/orders/list2/"+column+"/"+keyword;
+			location.href = url
+		})
+	})
+</script>
+</head>
+<body>
+	<h1>주문목록</h1>
+	<hr />
+	<select name="column" id="column">
+		<option value="Name">고객명</option>
+		<option value="Bookname">도서명</option>
+	</select>
+		
+	<input type="search" name="keyword" id="keyword"> <input type="submit" value="검색" id="btnSubmit"/>
+	<table>
+		<tr>
+			<td><a href="/orders/list2?sort=Orderid">주문번호</a></td>
+			<td><a href="/orders/list2?sort=Name">고객명</a></td>
+			<td><a href="/orders/list2?sort=Bookname">도서명</a></td>
+			<td><a href="/orders/list2?sort=Saleprice">판매가격</a></td>
+			<td><a href="/orders/list2?sort=Price">도서가격</a></td>
+			<td><a href="/orders/list2?sort=Orderdate">판매일</a></td>
+		</tr>
+		<tr th:each="o:${list}">
+			<td th:text="${o.orderid}"></td>
+			<td th:text="${o.name}"></td>
+			<td th:text="${o.bookname}"></td>
+			<td th:text="${o.saleprice}"></td>
+			<td th:text="${o.price}"></td>
+			<td th:text="${o.orderdate}"></td>
+		</tr>
+	</table>
+</body>
+</html>

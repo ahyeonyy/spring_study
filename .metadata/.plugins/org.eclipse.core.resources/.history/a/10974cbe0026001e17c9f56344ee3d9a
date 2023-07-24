@@ -1,0 +1,14 @@
+package com.example.demo.vo;
+
+import lombok.Data;
+
+@Data
+public class ReplyVO {
+	 int cno;
+	 int b_level;
+	 int b_step;
+	 int b_ref;
+	 Data regdate;
+	 String id;
+	 String content;
+}

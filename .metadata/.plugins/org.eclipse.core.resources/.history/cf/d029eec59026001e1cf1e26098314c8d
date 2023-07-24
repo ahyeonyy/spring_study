@@ -1,0 +1,125 @@
+package com.example.demo.controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.example.demo.dao.BoardDAO;
+import com.example.demo.dao.ReplyDAO;
+import com.example.demo.entity.Board;
+import com.example.demo.entity.Member;
+import com.example.demo.entity.Reply;
+import com.example.demo.vo.ReplyVO;
+import com.google.gson.Gson;
+
+import lombok.Setter;
+
+@Controller
+@Setter
+public class BoardController {
+	@Autowired
+	private BoardDAO dao;
+	
+	@Autowired
+	private ReplyDAO replyDAO;
+	
+	@GetMapping("/board/reply")
+	@ResponseBody
+	public String reply(int no){
+		String str= "";
+		ArrayList<ReplyVO> arr = new ArrayList<ReplyVO>();
+		List<Reply> list = replyDAO.findByNo(no);
+		for(Reply r : list) {
+			ReplyVO v = new ReplyVO();
+			v.setB_level(r.getB_level());
+			v.setB_ref(r.getB_ref());
+			v.setB_step(r.getB_step());
+			v.setCno(r.getCno());
+			v.setContent(r.getContent());
+			v.setId(r.getMember().getId());
+			v.setRegdate(r.getRegdate());
+			System.out.println(r.getCno());
+			System.out.println();
+			System.out.println(r.getB_ref());
+			System.out.println(r.getB_step());
+			System.out.println(r.getContent());
+			System.out.println(r.getRegdate());
+			System.out.println(r.getMember().getId());
+			arr.add(v);
+		}
+		return "OK";
+	}
+	
+	@PostMapping("/board/reply")
+	@ResponseBody
+	public String reply(int no, String id, String content) {
+		int cno = replyDAO.getNextCno();
+		int b_ref = cno;
+		int b_level = 0 ;
+		int b_step = 0;
+		Reply r = new Reply();
+		r.setB_level(b_level);
+		r.setB_ref(b_ref);
+		r.setB_step(b_step);
+		r.setRegdate(new Date());
+		r.setCno(cno);
+		r.setContent(content);
+		Board b = new Board();
+		b.setNo(cno);
+		Member m = new Member();
+		m.setId(id);
+		r.setMember(m);
+		r.setBoard(b);
+		replyDAO.save(r);
+		
+		return "OK";
+	}
+	
+	@GetMapping("/board/list")
+	public void list(Model model) {
+		model.addAttribute("list", dao.findAll());
+	}
+	
+	@PostMapping("/board/insert")
+	public ModelAndView insert (Board b) {
+		ModelAndView  mav = new ModelAndView("redirect:/board/list");
+		b.setRegdate(new Date());
+		dao.save(b);  
+		return mav;
+	}
+	
+	@GetMapping("/board/insert")
+	public void insertForm() {
+	}
+	
+	@GetMapping("/board/detail/{no}")
+	public String detail(@PathVariable("no") int no, Model model) {
+		model.addAttribute("b", dao.findById(no).get());
+		return "/board/detail";
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

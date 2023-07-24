@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>게시물 등록</h1>
+<hr />
+<form action="/board/save" method="post" enctype="multipart/form-data">
+<input type="hidden" th:value="${no}" name="no"/>
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"  />
+글제목: <input type="text" name="title" autofocus/> <br />
+작성자: <input type="text" name="writer" th:value="${session.user.name}"/> <br /> <!-- 객체를 상태유지하면 user.id 라고 해야함. --> 
+암호 : <input type="password" name="pwd" /> <br />
+글내용 : <br />
+<textarea name="content" cols="30" rows="10"></textarea> <br />
+파일: <input type="file" name="uploadFile" /> <br />
+<input type="submit" value="등록" />
+<input type="reset" value="다시입력" />
+</form>
+</body>
+</html>

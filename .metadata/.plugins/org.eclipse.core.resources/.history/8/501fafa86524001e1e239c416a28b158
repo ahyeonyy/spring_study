@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript">
+   $(function(){
+     $("#btnOK").click(function(){
+		          IMP.init("imp33232773");
+         IMP.request_pay({
+            pg:'kcp',
+            pay_method:'card',
+            merchant_uid:'merchant_'+new Date().getTime(),
+            name:'에어팟맥스',
+            amount:1000,
+            buyer_email:'qlqlql8448@naver.com',
+            buyer_name:'이아현',
+            buyer_tel:'010-5004-8448',
+            buyer_addr:'경기도 파주시 가람로 109 311-204',
+            buyer_postcode:'10869'
+         },function(rsp){
+            console.log(rsp);
+            if(rsp.success){
+               var msg = "결제가 완료되었습니다.";
+               msg += '고유ID:'+rsp.imp_uid;
+               msg += '상점 거래ID:'+rsp.merchant_uid;
+               msg += '결제 금액:' + rsp.paid_amount;
+               msg += '카드 승인번호 :' + rsp.apply_num;
+               $("#imp_uid").var(res.imp_uid);
+               $("#merchant_uid").var(res.merchant_uid);
+               $("#paid_amount").var(res.paid_amount);
+               $("#apply_num").var(res.apply_num);
+               //location.href = "payok.html";
+            }else{
+               var msg = "결제에 실패하였습니다.";
+               msg += '에러내용:'+rsp.error_msg;
+               alert(msg);
+            }   
+         });
+	 })
+   });
+</script>
+</head>
+<body>
+<button id="btnOK">누르고 싶지 !!!</button>
+
+<form action="/payok" method="post" id="pay">
+	<input type="hidden" name="imp_uid" id="imp_uid" />
+	<input type="hidden" name="merchant_uid" id="merchant_uid" />
+	<input type="hidden" name="paid_amount" id="paid_amount" />
+	<input type="hidden" name="apply_num" id="apply_num" />
+</form>
+</body>
+</html>
+
+

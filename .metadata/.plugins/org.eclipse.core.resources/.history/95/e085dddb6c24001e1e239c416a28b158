@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	Kakao.init("7c248b2a7ecace1d70680b17adec6fb8");
+	function kakaoLogin(){
+		Kakao.Auth.loginForm({
+			scope:"profile_nickname,account_email",
+			success:function(){
+				Kakao.API.request()
+			}
+		});
+		
+	}
+	
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

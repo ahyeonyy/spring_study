@@ -1,0 +1,28 @@
+package com.example.demo.controller;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.demo.dao.BoardDAO;
+import com.example.demo.entity.Board;
+
+import lombok.Setter;
+
+@Controller
+@Setter
+public class BoardController {
+	@Autowired
+	private BoardDAO dao;
+	
+	@PostMapping("/board/insert")
+	@ResponseBody
+	public String insert (Board b) {
+		b.setRegdate(new Date());
+		dao.save(b);
+		return "OK";
+	}
+}

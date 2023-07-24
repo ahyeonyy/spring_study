@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btnSame">동일한~ 도메인에 있는 ~ ajax 요청 학이 ~ </button>
+</body>
+</html>

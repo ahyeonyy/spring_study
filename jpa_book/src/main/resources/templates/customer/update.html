@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>회원수정</h1>
+<hr>
+<form method="post" action="/customer/save">
+	<input type="hidden" th:value="${c.custid}" name="custid" autofocus><br>
+	회원이름 : <input type="text" name="name" th:value="${c.name}" ><br>
+	주소 : <input type="text" name="addr" th:value="${c.addr}"><br>
+	전화번호 : <input type="text" name="phone" th:value="${c.phone}"><br>
+	회원사진 : <input type="text" name="fname" th:value="${c.fname}"><br>
+	<input type="submit" value="수정">
+	<input type="reset" value="다시입력">
+</form>
+</body>
+</html>

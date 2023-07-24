@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+	$(function(){
+		$("#btnReply").click(function(){
+			var data = $("#f").serializeArray();
+			$.post(
+				"/board/reply",
+				data,
+				function(){
+					alert("야호~")
+				}
+			)
+		})
+	})
+</script>
+</head>
+<body>
+<h1>게시물 상세</h1>
+<hr />
+글번호: <span th:text="${b.no}"></span>
+글제목 : <span th:text="${b.title}"></span><br />
+작성자 : <span th:text="${b.writer}"></span><br />
+글내용 : <br />
+<textarea  readonly th:text="${b.content}"  cols="30" rows="10"></textarea><br />
+등록일 : <span th:text="${b.regdate}"></span>
+<hr />
+<form id="f">
+	<input type="hidden" name="no" id="no" th:value="${b.no}"/>
+	<input type="hidden" name="id" id="id" th:value="${session.id}"/>
+	<input type="text" name="content" id="content" size="50"/>
+<button id="btnReply">등록</button>
+</form>
+
+<div id="reply_list">
+	
+</div>
+</body>
+</html>

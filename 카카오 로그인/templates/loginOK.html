@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" 
+	src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript">
+	Kakao.init("bf5eb602e7479411ca85be04bd126fbb");
+	function kakaoLogOut(){
+		Kakao.API.request({
+			url:"/v1/user/unlink",
+			success:function(){
+				alert("카카오 로그아웃되었습니다.");
+				location.href = "/login.html";
+			}
+		});
+	}
+</script>
+</head>
+<body>
+	<div th:if="${session.name != null}">
+		<p><span th:text="${session.name}"></span>  님, 로그인 하였습니다.</p>
+		<a href="javascript:kakaoLogOut()">로그아웃</a>
+	</div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+	
+	<a href="/board/list/1">게시글 목록</a>
+	<a href="/board/insert/0">게시글 등록</a>
+	<a href="/member/login">로그인 </a>
+	<h2>관리자 메뉴 </h2>
+	<h3>회원 목록</h3>
+	<hr />
+	<table>
+		<table>
+			<tr>
+				<td>아이디</td>
+				<td>이름</td>
+				<td>Role</td>
+				<td>Action</td>
+			</tr>
+		</table>
+		<table>
+			<tr th:each="m:${list}">
+				<td th:text="${m.id}"></td>
+				<td th:text="${m.name}"></td>
+				<td th:text="${m.role}"></td>
+				<td>
+					<a th:href="@{'/admin/member/delete/'+${m.id}}">삭제</a>
+				</td>
+			</tr>
+		</table>
+	</table>
+	
+</body>
+</html>

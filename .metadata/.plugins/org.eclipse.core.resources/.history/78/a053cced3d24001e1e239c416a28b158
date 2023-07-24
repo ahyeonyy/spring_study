@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+$(function() {
+  $.ajax({
+    url: "/newBook",
+    method: "GET",
+    success: function(arr) {
+	$.each(arr,function(){
+		var title = this.title;
+		var link = this.link;
+		$("#list").append("<li>"+title+"</li>");
+	})
+    }
+  });
+});
+
+	
+</script>
+<body>
+<h2>새로운 도서 정보</h2>
+<ul id = "list"></ul>
+</body>
+</html>
